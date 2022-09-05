@@ -1,0 +1,62 @@
+<div
+  class="container d-flex align-items-center justify-content-center w-50 bg-light rounded p-5"
+>
+  <div class="row w-100">
+    <div class="col-12">
+      <h2 class="d-flex align-items-center justify-content-center text-primary">
+        {{ getName() }} To Do App
+      </h2>
+      <div class="input-group mb-3">
+        <button
+          class="btn btn-outline-secondary bg-primary text-light"
+          type="button"
+          id="button-addon1"
+          (click)="addItem(todoText.value); todoText.value = ''"
+        >
+          Add
+        </button>
+        <input
+          type="text"
+          class="form-control"
+          #todoText
+          placeholder="Add Your Task..."
+          aria-label="Example text with button addon"
+          aria-describedby="button-addon1"
+        />
+      </div>
+      <div class="form-check form-switch m-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="isDisplay"
+          role="switch"
+          id="flexSwitchCheckChecked"
+          checked
+        />
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Display All</label
+        >
+      </div>
+      <table class="table col-12 mt-8">
+        <thead>
+          <tr class="table-danger">
+            <th>No</th>
+            <th scope="col-10">Your Task</th>
+            <th scope="col-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of getItems(); let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.description }}</td>
+            <td><input type="checkbox" [(ngModel)]="item.action" /></td>
+            <td [ngSwitch]="item.action">
+              <p *ngSwitchCase="true">Yes</p>
+              <p *ngSwitchCase="false">No</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
